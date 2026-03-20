@@ -908,7 +908,7 @@
 
         function startRefreshCountdown() {
             const refreshBtn = document.getElementById('refreshBtn');
-            let countdown = 10;
+            let countdown = 5;
             
             refreshBtn.disabled = true;
             clearInterval(countdownInterval); // Clear any old timers
@@ -931,14 +931,15 @@
         }
 
         // Check for new emails
-        async function checkEmails() {
+        async function checkEmails(isAutoRefresh = false) {
             if (!currentEmail) return;
 
             const refreshBtn = document.getElementById('refreshBtn');
             
-            if (refreshBtn.disabled) return;
-            
-            startRefreshCountdown();
+            if (!isAutoRefresh) {
+                if (refreshBtn.disabled) return;
+                startRefreshCountdown();
+            }
 
             try {
                 const response = await fetch(`${SCRIPT_URL}?action=getEmails&email=${encodeURIComponent(currentEmail)}&v=${new Date().getTime()}`, {
@@ -1112,9 +1113,9 @@
             stopAutoRefresh();
             refreshInterval = setInterval(() => {
                 if (currentEmail) {
-                    checkEmails();
+                    checkEmails(true); // pass true for auto-refresh to bypass disabled button
                 }
-            }, 12000); 
+            }, 5000); 
         }
 
         // Stop auto-refresh

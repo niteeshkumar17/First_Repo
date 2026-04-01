@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Report: ClipDown Video Downloader</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+      padding-top: 60px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: #5db8f5;
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+      margin-bottom: 30px;
+      border-radius: 5px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #0095f6;
+      margin: 25px 0 15px;
+      border-bottom: 2px solid #0095f6;
+      padding-bottom: 5px;
+    }
+
+    h3 {
+      margin: 20px 0 10px;
+      color: #2980b9;
+    }
+
+    .section {
+      background: white;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    pre {
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin: 15px 0;
+      font-family: 'Courier New', monospace;
+    }
+
+    code {
+      background: #f0f0f0;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .feature {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      border-left: 4px solid #3498db;
+    }
+
+    .feature h3 {
+      margin-top: 0;
+      font-size: 1rem;
+    }
+
+    .feature p {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 0;
+    }
+
+    .tech-stack {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .tech-item {
+      background: #e8f4fc;
+      padding: 12px 16px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 500;
+      color: #2c3e50;
+      border: 1px solid rgba(52, 152, 219, 0.2);
+    }
+
+    .conclusion {
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #666;
+    }
+
+    .live-link {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 30px;
+      background: #0095f6;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .live-link:hover {
+      background: #0077cc;
+    }
+
+    .architecture-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .architecture-table th {
+      background: #0095f6;
+      color: white;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .architecture-table td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .architecture-table tr:hover {
+      background: #f5f5f5;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #0095f6;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+      height: 60px;
+      box-sizing: border-box;
+      justify-content: space-between;
+    }
+
+    .home-button {
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .home-icon {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    @media screen and (max-width: 1024px) {
+      .container { max-width: 90%; padding: 15px; }
+      .features { grid-template-columns: 1fr; gap: 10px; }
+      .section { padding: 20px; margin-bottom: 20px; }
+    }
+
+    @media screen and (max-width: 768px) {
+      body { padding-top: 60px; }
+      .container { padding-top: 10px; }
+      header { padding: 20px 0; margin-bottom: 20px; }
+      h1 { font-size: 24px; }
+      h2 { font-size: 20px; }
+      h3 { font-size: 18px; }
+      .section { padding: 15px; }
+      .tech-stack { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media screen and (max-width: 480px) {
+      body { padding-top: 55px; }
+      .container { padding: 10px; padding-top: 15px; }
+      header { padding: 15px 0; }
+      h1 { font-size: 20px; }
+      h2 { font-size: 18px; }
+      h3 { font-size: 16px; }
+      .feature { padding: 12px; }
+      body { font-size: 14px; }
+      .navbar { padding: 10px !important; }
+      .home-button span { display: none; }
+      .tech-stack { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="home-button">
+      <svg class="home-icon" viewBox="0 0 24 24">
+        <path d="M9.005 16.545a2.997 2.997 0 012.997-2.997h0A2.997 2.997 0 0115 16.545V22h7V11.543L12 2 2 11.543V22h7.005z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/>
+      </svg>
+      <span>Home</span>
+    </a>
+  </nav>
+  
+  <div class="container">
+    <header>
+      <h1>ClipDown — Video Downloader</h1>
+      <p>A Full-Stack Web Application for Media Downloading</p>
+      <a href="https://clipdown.onrender.com" class="live-link" target="_blank">🚀 Visit Live Site</a>
+    </header>
+
+    <div class="section">
+      <h2>1. Introduction</h2>
+      <p>ClipDown is a self-hosted, full-stack video and audio downloader web application with a premium dark-themed UI. Users can paste links from YouTube, TikTok, Instagram, Twitter/X, and 1000+ other websites to download media as MP4 video or MP3 audio files.</p>
+      <p>The project demonstrates proficiency in full-stack development, including Python backend development with Flask, frontend design with vanilla HTML/CSS/JavaScript, Docker containerization, and cloud deployment on Render.</p>
+      <p>Inspired by the open-source <a href="https://github.com/averygan/reclip" target="_blank">ReClip</a> project by averygan.</p>
+    </div>
+
+    <div class="section">
+      <h2>2. Project Objectives</h2>
+      <ul>
+        <li>Build a full-stack web application with Python Flask backend</li>
+        <li>Create a premium, responsive UI that works across all devices</li>
+        <li>Support downloading from 1000+ video platforms via yt-dlp</li>
+        <li>Implement bulk URL downloading with quality selection</li>
+        <li>Deploy using Docker on Render for 24/7 availability</li>
+        <li>Handle concurrent downloads with threaded job management</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>3. Technologies Used</h2>
+      <div class="tech-stack">
+        <div class="tech-item">🐍 Python 3.11</div>
+        <div class="tech-item">🌶️ Flask</div>
+        <div class="tech-item">📥 yt-dlp</div>
+        <div class="tech-item">🎬 FFmpeg</div>
+        <div class="tech-item">🐳 Docker</div>
+        <div class="tech-item">🚀 Gunicorn</div>
+        <div class="tech-item">☁️ Render</div>
+        <div class="tech-item">🎨 Vanilla CSS/JS</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>4. Key Features</h2>
+      <div class="features">
+        <div class="feature">
+          <h3>🎬 Multi-Platform Support</h3>
+          <p>Download from YouTube, TikTok, Instagram, Twitter/X, Reddit, Facebook, Vimeo, and 1000+ more sites.</p>
+        </div>
+        <div class="feature">
+          <h3>🎵 Dual Format Support</h3>
+          <p>Choose between MP4 video download or MP3 audio extraction with one-click toggle.</p>
+        </div>
+        <div class="feature">
+          <h3>📊 Quality Picker</h3>
+          <p>Select video resolution (1080p, 720p, 480p, etc.) with per-format quality chips.</p>
+        </div>
+        <div class="feature">
+          <h3>📋 Bulk Downloads</h3>
+          <p>Paste multiple URLs at once — separated by spaces, commas, or newlines — with automatic deduplication.</p>
+        </div>
+        <div class="feature">
+          <h3>⚡ Real-time Status</h3>
+          <p>Loading skeletons, download progress spinners, success/error states with friendly error messages.</p>
+        </div>
+        <div class="feature">
+          <h3>🐳 Docker Deployment</h3>
+          <p>Containerized with Docker for easy deployment on Render, Railway, or any cloud platform.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>5. System Architecture</h2>
+      <table class="architecture-table">
+        <tr>
+          <th>Component</th>
+          <th>Technology</th>
+          <th>Purpose</th>
+        </tr>
+        <tr>
+          <td>Frontend</td>
+          <td>HTML/CSS/JS</td>
+          <td>User interface with dark blue theme</td>
+        </tr>
+        <tr>
+          <td>Backend</td>
+          <td>Python Flask</td>
+          <td>REST API for video info and downloads</td>
+        </tr>
+        <tr>
+          <td>Download Engine</td>
+          <td>yt-dlp + FFmpeg</td>
+          <td>Video/audio extraction and conversion</td>
+        </tr>
+        <tr>
+          <td>Job System</td>
+          <td>Python Threading</td>
+          <td>Concurrent background downloads</td>
+        </tr>
+        <tr>
+          <td>Production Server</td>
+          <td>Gunicorn</td>
+          <td>WSGI HTTP server with workers</td>
+        </tr>
+        <tr>
+          <td>Containerization</td>
+          <td>Docker</td>
+          <td>Isolated, reproducible deployment</td>
+        </tr>
+        <tr>
+          <td>Hosting</td>
+          <td>Render</td>
+          <td>Cloud platform with 24/7 uptime</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>6. API Endpoints</h2>
+      <h3>6.1 Video Info</h3>
+      <pre><code>POST /api/info
+Body: { "url": "https://youtube.com/watch?v=..." }
+Response: { title, thumbnail, duration, uploader, formats[] }</code></pre>
+
+      <h3>6.2 Start Download</h3>
+      <pre><code>POST /api/download
+Body: { "url": "...", "format": "video|audio", "format_id": "..." }
+Response: { "job_id": "abc123" }</code></pre>
+
+      <h3>6.3 Check Status</h3>
+      <pre><code>GET /api/status/{job_id}
+Response: { "status": "done|downloading|error", "filename": "..." }</code></pre>
+
+      <h3>6.4 Download File</h3>
+      <pre><code>GET /api/file/{job_id}
+Response: Binary file download</code></pre>
+    </div>
+
+    <div class="section">
+      <h2>7. Implementation Highlights</h2>
+      <h3>7.1 Threaded Downloads</h3>
+      <p>Each download runs in a separate daemon thread, allowing multiple concurrent downloads without blocking the Flask server. The job system tracks status and provides real-time updates via polling.</p>
+
+      <h3>7.2 Auto Cleanup</h3>
+      <p>Downloaded files are automatically cleaned up after 30 minutes to conserve disk space on the Render deployment. This ensures the server doesn't run out of storage over time.</p>
+
+      <h3>7.3 Error Handling</h3>
+      <p>The application provides user-friendly error messages for common issues like unsupported URLs, private videos, geo-restrictions, and timeouts — making the experience smooth even when things go wrong.</p>
+    </div>
+
+    <div class="section">
+      <h2>8. Challenges & Solutions</h2>
+      <table class="architecture-table">
+        <tr>
+          <th>Challenge</th>
+          <th>Solution</th>
+        </tr>
+        <tr>
+          <td>Long download times blocking server</td>
+          <td>Implemented threaded background jobs with polling</td>
+        </tr>
+        <tr>
+          <td>Disk space on cloud hosting</td>
+          <td>Auto-cleanup of files older than 30 minutes</td>
+        </tr>
+        <tr>
+          <td>Various URL formats and platforms</td>
+          <td>Leveraged yt-dlp's extensive site support</td>
+        </tr>
+        <tr>
+          <td>Video + audio merging</td>
+          <td>Used FFmpeg for seamless format merging</td>
+        </tr>
+        <tr>
+          <td>Production deployment</td>
+          <td>Docker + Gunicorn for reliable serving</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>9. Future Enhancements</h2>
+      <ul>
+        <li>Add download progress percentage with yt-dlp hooks</li>
+        <li>Implement download history with local storage</li>
+        <li>Add playlist support for batch downloading</li>
+        <li>Support custom output filenames</li>
+        <li>Add subtitle download option</li>
+        <li>Implement rate limiting for public deployment</li>
+      </ul>
+    </div>
+
+    <div class="section conclusion">
+      <h2>10. Conclusion</h2>
+      <p>ClipDown successfully demonstrates building a full-stack web application from scratch — combining a Python Flask backend with a premium frontend, containerized Docker deployment, and cloud hosting on Render. The project supports downloading from 1000+ video platforms and provides a smooth, modern user experience.</p>
+      <p>Through this project, I gained valuable experience in backend API design, threading for concurrent operations, Docker containerization, cloud deployment, and creating polished user interfaces that rival commercial products.</p>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Niteesh Kumar - Full Stack Developer</p>
+    </footer>
+  </div>
+</body>
+</html>
